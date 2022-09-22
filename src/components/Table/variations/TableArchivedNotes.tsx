@@ -1,12 +1,22 @@
 import React from 'react';
 import classes from "../Table.module.css";
 import {NoteType} from "../../../@type/NoteType";
+import {useAppDispatch} from "../../../hooks/redux";
+import {addNote} from "../../../store/reducers/NoteSlice";
+import {deleteArchivedNote} from "../../../store/reducers/ArchivedNoteSlice";
 
 interface TableArchivedNotesProps {
 	archivedNotes: NoteType[]
 }
 
 const TableArchivedNotes = ({ archivedNotes }: TableArchivedNotesProps) => {
+	const dispatch = useAppDispatch();
+
+	const unarchivedNoteHandler = (item: NoteType, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+		dispatch(addNote(item))
+		dispatch(deleteArchivedNote(item))
+	}
+
 	return (
 		<table className={classes.table__notes} id="table__archived__notes">
 			<tbody>
@@ -36,7 +46,9 @@ const TableArchivedNotes = ({ archivedNotes }: TableArchivedNotesProps) => {
 						<td>{item.content}</td>
 						<td className={classes.align__right}>
 							<img src="https://cdn-icons-png.flaticon.com/512/1388/1388796.png"
-								 className={[classes.image__category, classes.button].join(' ')} alt=''/>
+								 className={[classes.image__category, classes.button].join(' ')} alt=''
+								onClick={(e) => {unarchivedNoteHandler(item, e)}}
+							/>
 						</td>
 					</tr>
 				})}
