@@ -1,12 +1,12 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import noteReducer from "./reducers/NoteSlice";
 import categoryReducer from "./reducers/CategorySlice";
-import archivedNoteReducer from "./reducers/ArchivedNoteSlice";
+import modalReducer from "./reducers/ModalSlice"
 
 const rootReducer = combineReducers({
+	modalReducer,
 	noteReducer,
 	categoryReducer,
-	archivedNoteReducer
 })
 
 export const setupStore = () => {

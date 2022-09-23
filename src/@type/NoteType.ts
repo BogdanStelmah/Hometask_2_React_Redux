@@ -1,9 +1,17 @@
+import {CategoryType} from "./Category";
+
 export type NoteType = {
-	key: string;
-	image: string;
-	name: string;
-	created: string;
-	category: 'Task' | 'Random Thought' | 'Idea',
-	content: string,
-	dates: string;
+	id: string
+	image: string
+	name: string
+	created: string
+	category: CategoryType
+	content: string
+	dates: string[]
+	state: NoteState
+}
+
+export enum NoteState {
+	active,
+	archive
 }

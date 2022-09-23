@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from "../Table.module.css";
-import {NoteType} from "../../../@type/NoteType";
+import {NoteState, NoteType} from "../../../@type/NoteType";
 import {useAppDispatch} from "../../../hooks/redux";
-import {deleteNote, editNote} from "../../../store/reducers/NoteSlice";
-import {addArchivedNote} from "../../../store/reducers/ArchivedNoteSlice";
+import {deleteNote, editNote, setEditingNoteId} from "../../../store/reducers/NoteSlice";
+import {openEditModal} from "../../../store/reducers/ModalSlice";
 
 interface TableNotesProps {
 	notes: NoteType[];
@@ -13,7 +13,8 @@ const TableNotes = ({ notes }: TableNotesProps) => {
 	const dispatch = useAppDispatch();
 
 	const editNoteHandler = (item: NoteType, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-		
+		dispatch(setEditingNoteId(item.id));
+		dispatch(openEditModal());
 	}
 
 	const deleteNoteHandler = (item: NoteType, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
@@ -21,8 +22,10 @@ const TableNotes = ({ notes }: TableNotesProps) => {
 	}
 
 	const archivedNoteHandler = (item: NoteType, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-		dispatch(addArchivedNote(item))
-		dispatch(deleteNote(item))
+		const element = {...item}
+		element.state = NoteState.archive
+
+		dispatch(editNote(element))
 	}
 
 	return (
@@ -46,7 +49,7 @@ const TableNotes = ({ notes }: TableNotesProps) => {
 				</tr>
 
 				{notes.map(item => {
-					return <tr key={item.key}>
+					return <tr key={item.id}>
 						<td>
 							<div className={classes.notes__image}>
 								<img
@@ -56,11 +59,11 @@ const TableNotes = ({ notes }: TableNotesProps) => {
 								/>
 							</div>
 						</td>
-						<td>{item.name}</td>
+						<td>{item.name.length > 20 ? item.name.substring(0, 20) + '...' : item.name}</td>
 						<td>{item.created}</td>
-						<td>{item.category}</td>
-						<td>{item.content}</td>
-						<td>{item.dates}</td>
+						<td>{item.category.name}</td>
+						<td>{item.content.length > 20 ? item.content.substring(0, 20) + '...' : item.content}</td>
+						<td>{item.dates.join(', ')}</td>
 						<td className={classes.align__right}>
 							<img src=" https://cdn-icons-png.flaticon.com/512/650/650194.png"
 								 className={[classes.image__category, classes.button].join(' ')} alt=''

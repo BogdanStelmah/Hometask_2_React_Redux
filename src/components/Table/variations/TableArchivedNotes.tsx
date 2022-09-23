@@ -1,9 +1,8 @@
 import React from 'react';
 import classes from "../Table.module.css";
-import {NoteType} from "../../../@type/NoteType";
+import {NoteState, NoteType} from "../../../@type/NoteType";
 import {useAppDispatch} from "../../../hooks/redux";
-import {addNote} from "../../../store/reducers/NoteSlice";
-import {deleteArchivedNote} from "../../../store/reducers/ArchivedNoteSlice";
+import {editNote} from "../../../store/reducers/NoteSlice";
 
 interface TableArchivedNotesProps {
 	archivedNotes: NoteType[]
@@ -13,8 +12,10 @@ const TableArchivedNotes = ({ archivedNotes }: TableArchivedNotesProps) => {
 	const dispatch = useAppDispatch();
 
 	const unarchivedNoteHandler = (item: NoteType, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-		dispatch(addNote(item))
-		dispatch(deleteArchivedNote(item))
+		const element = {...item}
+		element.state = NoteState.active
+
+		dispatch(editNote(element))
 	}
 
 	return (
@@ -31,7 +32,7 @@ const TableArchivedNotes = ({ archivedNotes }: TableArchivedNotesProps) => {
 				</tr>
 
 				{archivedNotes.map(item => {
-					return <tr key={item.key}>
+					return <tr key={item.id}>
 						<td>
 							<div className={classes.notes__image}>
 								<img
@@ -42,7 +43,7 @@ const TableArchivedNotes = ({ archivedNotes }: TableArchivedNotesProps) => {
 							</div>
 						</td>
 						<td>{item.name}</td>
-						<td>{item.category}</td>
+						<td>{item.category.name}</td>
 						<td>{item.content}</td>
 						<td className={classes.align__right}>
 							<img src="https://cdn-icons-png.flaticon.com/512/1388/1388796.png"

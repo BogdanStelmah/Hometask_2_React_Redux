@@ -1,9 +1,9 @@
 import React from 'react';
 import classes from "../Table.module.css";
-import {CategoryType} from "../../../@type/Category";
+import {CategoryStatType} from "../../../@type/Category";
 
 interface TableStatisticsProps {
-	categories: CategoryType[]
+	categories: CategoryStatType[]
 }
 
 const TableStatistics = ({ categories }: TableStatisticsProps) => {

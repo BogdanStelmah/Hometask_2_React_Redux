@@ -1,6 +1,10 @@
 export type CategoryType = {
+	id: string
 	name: string;
 	imageSrc: string;
-	active: number,
-	archived: number
 }
+
+export type CategoryStatType  = {
+	active: number,
+	archived: number,
+} & CategoryType
