@@ -1,9 +1,10 @@
 import React from 'react';
 import classes from "../Table.module.css";
-import {NoteState, NoteType} from "../../../@type/NoteType";
+import {EditNoteType, NoteState, NoteType} from "../../../@type/NoteType";
 import {useAppDispatch} from "../../../hooks/redux";
 import {deleteNote, editNote, setEditingNoteId} from "../../../store/reducers/NoteSlice";
 import {openEditModal} from "../../../store/reducers/ModalSlice";
+import {getLocateDateUSFormat} from "../../../utils/utils";
 
 interface TableNotesProps {
 	notes: NoteType[];
@@ -18,12 +19,14 @@ const TableNotes = ({ notes }: TableNotesProps) => {
 	}
 
 	const deleteNoteHandler = (item: NoteType, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-		dispatch(deleteNote(item));
+		dispatch(deleteNote(item.id))
 	}
 
 	const archivedNoteHandler = (item: NoteType, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-		const element = {...item}
-		element.state = NoteState.archive
+		const element: EditNoteType = {
+			id: item.id,
+			state: NoteState.archive
+		}
 
 		dispatch(editNote(element))
 	}
@@ -53,14 +56,14 @@ const TableNotes = ({ notes }: TableNotesProps) => {
 						<td>
 							<div className={classes.notes__image}>
 								<img
-									src={item.image}
+									src={item.category.imageSrc}
 									className={classes.image__category}
 									alt={item.name}
 								/>
 							</div>
 						</td>
 						<td>{item.name.length > 20 ? item.name.substring(0, 20) + '...' : item.name}</td>
-						<td>{item.created}</td>
+						<td>{getLocateDateUSFormat(item.created)}</td>
 						<td>{item.category.name}</td>
 						<td>{item.content.length > 20 ? item.content.substring(0, 20) + '...' : item.content}</td>
 						<td>{item.dates.join(', ')}</td>

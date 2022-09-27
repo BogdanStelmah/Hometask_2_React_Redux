@@ -3,11 +3,11 @@ import Modal from "./Modal";
 import classes from './Modal.module.css';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {closeCreateModal} from "../../store/reducers/ModalSlice";
-import {NoteState, NoteType} from "../../@type/NoteType";
-import {dateSearch, generateKey, getLocateDateUSFormat} from "../../utils/utils";
-import {addNote} from "../../store/reducers/NoteSlice";
+import {CreateNoteType} from "../../@type/NoteType";
+import {createNote} from "../../store/reducers/NoteSlice";
+import {getStat} from "../../store/reducers/CategorySlice";
 
-const EditNoteModal = () => {
+const CreateNoteModal = () => {
 	const dispatch = useAppDispatch()
 
 	const categories = useAppSelector(state => state.categoryReducer.categories);
@@ -26,24 +26,14 @@ const EditNoteModal = () => {
 			return
 		}
 
-		const selectedCategory = categories.find(item => item.id === category.value)
-		if (!selectedCategory) {
-			setError('Please enter valid category!')
-			return
-		}
-
-		const newNote: NoteType = {
-			id: generateKey(),
-			image: selectedCategory.imageSrc,
+		const newNote: CreateNoteType = {
 			name: name.value,
-			created: getLocateDateUSFormat(),
-			category: selectedCategory,
+			categoryId: category.value,
 			content: content.value,
-			dates: dateSearch(content.value),
-			state: NoteState.active,
 		}
 
-		dispatch(addNote(newNote))
+		dispatch(createNote(newNote))
+
 		dispatch(closeCreateModal())
 	}
 
@@ -92,4 +82,4 @@ const EditNoteModal = () => {
 	);
 };
 
-export default EditNoteModal;
+export default CreateNoteModal;

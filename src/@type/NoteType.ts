@@ -1,8 +1,21 @@
 import {CategoryType} from "./Category";
 
+export type CreateNoteType = {
+	name: string
+	categoryId: string
+	content: string
+}
+
+export type EditNoteType = {
+	id: string
+	name?: string
+	categoryId?: string
+	content?: string
+	state?: NoteState
+}
+
 export type NoteType = {
 	id: string
-	image: string
 	name: string
 	created: string
 	category: CategoryType
@@ -12,6 +25,6 @@ export type NoteType = {
 }
 
 export enum NoteState {
-	active,
-	archive
+	active = "Active",
+	archive = "Archive"
 }

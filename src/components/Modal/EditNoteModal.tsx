@@ -3,8 +3,8 @@ import Modal from "./Modal";
 import classes from './Modal.module.css';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {closeEditModal} from "../../store/reducers/ModalSlice";
-import {dateSearch} from "../../utils/utils";
 import {editNote} from "../../store/reducers/NoteSlice";
+import {EditNoteType} from "../../@type/NoteType";
 
 const EditNoteModal = () => {
 	const categories = useAppSelector(state => state.categoryReducer.categories);
@@ -38,16 +38,15 @@ const EditNoteModal = () => {
 			return
 		}
 
-		const indexCategory = categories.findIndex(item => item.id === category.value)
 		if (editingNote) {
-			const copyNote = {...editingNote}
+			const note: EditNoteType = {
+				id: editingNote.id,
+				name: name.value,
+				content: content.value,
+				categoryId: category.value
+			}
 
-			copyNote.name = name.value
-			copyNote.category = {...copyNote.category, ...categories[indexCategory]}
-			copyNote.content = content.value
-			copyNote.dates = dateSearch(content.value)
-
-			dispatch(editNote(copyNote))
+			dispatch(editNote(note))
 		}
 
 		dispatch(closeEditModal())

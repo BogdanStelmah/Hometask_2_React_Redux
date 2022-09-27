@@ -5,6 +5,13 @@ export type CategoryType = {
 }
 
 export type CategoryStatType  = {
-	active: number,
-	archived: number,
+	active?: number,
+	archived?: number,
 } & CategoryType
+
+export type StatType = {
+	[key: string]: {
+		active: number,
+		archive: number
+	}
+}

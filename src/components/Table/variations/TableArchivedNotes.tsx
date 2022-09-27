@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from "../Table.module.css";
-import {NoteState, NoteType} from "../../../@type/NoteType";
+import {EditNoteType, NoteState, NoteType} from "../../../@type/NoteType";
 import {useAppDispatch} from "../../../hooks/redux";
 import {editNote} from "../../../store/reducers/NoteSlice";
 
@@ -12,8 +12,10 @@ const TableArchivedNotes = ({ archivedNotes }: TableArchivedNotesProps) => {
 	const dispatch = useAppDispatch();
 
 	const unarchivedNoteHandler = (item: NoteType, e: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-		const element = {...item}
-		element.state = NoteState.active
+		const element: EditNoteType = {
+			id: item.id,
+			state: NoteState.active
+		}
 
 		dispatch(editNote(element))
 	}
@@ -36,7 +38,7 @@ const TableArchivedNotes = ({ archivedNotes }: TableArchivedNotesProps) => {
 						<td>
 							<div className={classes.notes__image}>
 								<img
-									src={item.image}
+									src={item.category.imageSrc}
 									className={classes.image__category}
 									alt={item.name}
 								/>

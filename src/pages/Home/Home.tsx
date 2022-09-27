@@ -7,10 +7,16 @@ import {NoteState} from "../../@type/NoteType";
 import EditNoteModal from "../../components/Modal/EditNoteModal";
 import {openCreateModal} from "../../store/reducers/ModalSlice";
 import CreateNoteModal from "../../components/Modal/CreateNoteModal";
-import {updateCategoryInfo} from "../../store/reducers/CategorySlice";
+import {fetchNotes} from "../../store/reducers/NoteSlice";
+import {getCategories, getStat} from "../../store/reducers/CategorySlice";
 
 const Home = () => {
 	const dispatch = useAppDispatch()
+
+	useEffect(() => {
+		dispatch(getCategories())
+		dispatch(fetchNotes())
+	}, [dispatch])
 
 	const isEditNoteModalVisible = useAppSelector(state => state.modalReducer.isEditNoteModalVisible)
 	const isCreateNoteModalVisible = useAppSelector(state => state.modalReducer.isCreateNoteModalVisible)
@@ -21,8 +27,8 @@ const Home = () => {
 	const dataArchivedNotes = allNotes.filter(note => note.state === NoteState.archive);
 
 	useEffect(() => {
-		dispatch(updateCategoryInfo(allNotes))
-	}, [ allNotes ])
+		dispatch(getStat())
+	}, [allNotes])
 
 	const clickCreateNoteHandler = () => {
 		dispatch(openCreateModal())
