@@ -1,5 +1,4 @@
 import React, {ReactNode} from 'react';
-import classes from "./Table.module.css"
 import TableNotes from "./variations/TableNotes";
 import {TypeTable} from "../../@type/enum";
 import TableArchivedNotes from "./variations/TableArchivedNotes";
@@ -24,7 +23,7 @@ const Table = (props: TableProps) => {
 	}
 
 	return (
-		<div className={classes.block__for__table}>
+		<div className="">
 			{renderTable(props.typeTable)}
 		</div>
 	);

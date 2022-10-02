@@ -37,13 +37,15 @@ const Home = () => {
 	const dataCategories = useAppSelector(state => state.categoryReducer.categories);
 
 	return (
-		<main>
-			<div className={classes.__container}>
+		<main className="bg-gray-50 mx-2">
+			<div className="max-w-5xl mx-auto">
 				<Table typeTable={TypeTable.Notes} dataSource={dataNotes}/>
 
-				<button className={classes.button__create__note} onClick={clickCreateNoteHandler}>
-					Create Note
-				</button>
+				<div className="flex justify-end">
+					<button className="h-7 w-28 bg-gray-200 rounded-md text-gray-700 my-2 cursor-pointer" onClick={clickCreateNoteHandler}>
+						Create Note
+					</button>
+				</div>
 
 				<Table typeTable={TypeTable.StatisticsByCategory} dataSource={dataCategories}/>
 				<Table typeTable={TypeTable.ArchivedNotes} dataSource={dataArchivedNotes}/>
