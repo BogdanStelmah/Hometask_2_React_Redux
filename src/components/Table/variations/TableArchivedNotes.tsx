@@ -52,7 +52,7 @@ const TableArchivedNotes = ({ archivedNotes }: TableArchivedNotesProps) => {
 						<td className="rounded-br-md rounded-tr-md">
 							<div className="flex justify-end m-2">
 								<img src="https://cdn-icons-png.flaticon.com/512/1388/1388796.png"
-									 className="w-5 h-5 ml-1 cursor-pointer" alt=''
+									 className="w-5 h-5 ml-1 cursor-pointer hover:opacity-50" alt=''
 									 onClick={(e) => {unarchivedNoteHandler(item, e)}}
 								/>
 							</div>

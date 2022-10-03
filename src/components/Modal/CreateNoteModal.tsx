@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import Modal from "./Modal";
-import classes from './Modal.module.css';
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
 import {closeCreateModal} from "../../store/reducers/ModalSlice";
 import {CreateNoteType} from "../../@type/NoteType";
 import {createNote} from "../../store/reducers/NoteSlice";
-import {getStat} from "../../store/reducers/CategorySlice";
+import Button from "../UI/Button";
 
 const CreateNoteModal = () => {
 	const dispatch = useAppDispatch()
@@ -43,14 +42,15 @@ const CreateNoteModal = () => {
 
 	return (
 		<Modal>
-			<h3 className={classes.modal__title}>Create note</h3>
-			<form method="post" className={classes.modal__form} onSubmit={submitHandler}>
+			<h3 className="text-3xl text-center pb-3 border-b-2 border-white">Create note</h3>
+			<form method="post" className="flex flex-col gap-3" onSubmit={submitHandler}>
 				<label>
 					Name:
 					<input type="text"
 						   placeholder='Name...'
 						   value={name.value}
 						   onChange={event => setName({ value: event.target.value })}
+						   className="input"
 					/>
 				</label>
 				<label>
@@ -58,6 +58,7 @@ const CreateNoteModal = () => {
 					<select
 						value={category.value}
 						onChange={event => setCategory({ value: event.target.value })}
+						className="input"
 					>
 						{categories.map(category =>
 							<option value={category.id} key={category.id}>{category.name}</option>
@@ -69,14 +70,20 @@ const CreateNoteModal = () => {
 					<textarea
 						value={content.value}
 						placeholder='Content...'
-						onChange={event => setContent({ value: event.target.value })
-						}></textarea>
+						onChange={event => setContent({ value: event.target.value })}
+						className="input"
+					></textarea>
 				</label>
 
 				{error && <p>{error}</p>}
 
-				<button type="submit">Create</button>
-				<button type="reset" onClick={(event => cancelHandler(event))}>Cancel</button>
+				<Button type="submit" className="w-full">
+					Create
+				</Button>
+
+				<Button type="reset" onClick={(event => cancelHandler(event))} className="w-full">
+					Cancel
+				</Button>
 			</form>
 		</Modal>
 	);

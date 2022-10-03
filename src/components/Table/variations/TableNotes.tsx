@@ -74,15 +74,15 @@ const TableNotes = ({ notes }: TableNotesProps) => {
 						<td className="rounded-br-md rounded-tr-md">
 							<div className="flex justify-end m-2">
 								<img src=" https://cdn-icons-png.flaticon.com/512/650/650194.png"
-									 className="w-5 h-5 ml-1 cursor-pointer" alt=''
+									 className="w-5 h-5 ml-1 cursor-pointer hover:opacity-50" alt=''
 									 onClick={(e) => editNoteHandler(item, e)}
 								/>
 								<img src=" https://cdn-icons-png.flaticon.com/512/565/565491.png"
-									 className="w-5 h-5 ml-1 cursor-pointer" alt=''
+									 className="w-5 h-5 ml-1 cursor-pointer hover:opacity-50" alt=''
 									 onClick={(e) => deleteNoteHandler(item, e)}
 								/>
 								<img src="https://cdn-icons-png.flaticon.com/512/61/61016.png"
-									 className="w-5 h-5 ml-1 cursor-pointer" alt=''
+									 className="w-5 h-5 ml-1 cursor-pointer hover:opacity-50" alt=''
 									 onClick={(e) => archivedNoteHandler(item, e)}
 								/>
 							</div>

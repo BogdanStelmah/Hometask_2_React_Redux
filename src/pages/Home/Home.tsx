@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import classes from './Home.module.css';
 import {Table} from "../../components/Table";
 import {TypeTable} from "../../@type/enum";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
@@ -9,6 +8,7 @@ import {openCreateModal} from "../../store/reducers/ModalSlice";
 import CreateNoteModal from "../../components/Modal/CreateNoteModal";
 import {fetchNotes} from "../../store/reducers/NoteSlice";
 import {getCategories, getStat} from "../../store/reducers/CategorySlice";
+import Button from "../../components/UI/Button";
 
 const Home = () => {
 	const dispatch = useAppDispatch()
@@ -37,14 +37,14 @@ const Home = () => {
 	const dataCategories = useAppSelector(state => state.categoryReducer.categories);
 
 	return (
-		<main className="bg-gray-50 mx-2">
+		<main className="bg-white mx-2">
 			<div className="max-w-5xl mx-auto">
 				<Table typeTable={TypeTable.Notes} dataSource={dataNotes}/>
 
 				<div className="flex justify-end">
-					<button className="h-7 w-28 bg-gray-200 rounded-md text-gray-700 my-2 cursor-pointer" onClick={clickCreateNoteHandler}>
+					<Button onClick={clickCreateNoteHandler}>
 						Create Note
-					</button>
+					</Button>
 				</div>
 
 				<Table typeTable={TypeTable.StatisticsByCategory} dataSource={dataCategories}/>
