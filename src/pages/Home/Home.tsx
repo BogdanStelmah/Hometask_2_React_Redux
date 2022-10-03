@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import classes from './Home.module.css';
 import {Table} from "../../components/Table";
 import {TypeTable} from "../../@type/enum";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux";
@@ -9,6 +8,7 @@ import {openCreateModal} from "../../store/reducers/ModalSlice";
 import CreateNoteModal from "../../components/Modal/CreateNoteModal";
 import {fetchNotes} from "../../store/reducers/NoteSlice";
 import {getCategories, getStat} from "../../store/reducers/CategorySlice";
+import Button from "../../components/UI/Button";
 
 const Home = () => {
 	const dispatch = useAppDispatch()
@@ -37,13 +37,15 @@ const Home = () => {
 	const dataCategories = useAppSelector(state => state.categoryReducer.categories);
 
 	return (
-		<main>
-			<div className={classes.__container}>
+		<main className="bg-white mx-2">
+			<div className="max-w-5xl mx-auto">
 				<Table typeTable={TypeTable.Notes} dataSource={dataNotes}/>
 
-				<button className={classes.button__create__note} onClick={clickCreateNoteHandler}>
-					Create Note
-				</button>
+				<div className="flex justify-end">
+					<Button onClick={clickCreateNoteHandler}>
+						Create Note
+					</Button>
+				</div>
 
 				<Table typeTable={TypeTable.StatisticsByCategory} dataSource={dataCategories}/>
 				<Table typeTable={TypeTable.ArchivedNotes} dataSource={dataArchivedNotes}/>
