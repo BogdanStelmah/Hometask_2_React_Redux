@@ -1,5 +1,5 @@
 export enum TypeTable {
-	Notes,
-	StatisticsByCategory,
-	ArchivedNotes
+	Notes = 'Notes',
+	StatisticsByCategory = 'StatisticsByCategory',
+	ArchivedNotes = 'ArchivedNotes'
 }
