@@ -11,7 +11,7 @@ const TableStatistics = ({ categories }: TableStatisticsProps) => {
 			<table className="w-full border-separate border-spacing-y-3 text-left table-fixed" id="table__category">
 				<tbody>
 				<tr className="bg-zinc-400 text-gray-50">
-					<th className="rounded-bl-md rounded-tl-md w-20 h-10"></th>
+					<th className="rounded-bl-md rounded-tl-md w-16 h-10"></th>
 					<th>Note Category</th>
 					<th>Active</th>
 					<th className="rounded-br-md rounded-tr-md">Archived</th>
