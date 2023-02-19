@@ -17,6 +17,7 @@ You will also see any lint errors in the console.
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
 [GPL](https://www.gnu.org/licenses/gpl-3.0.html)
 
 [licenses.json](https://github.com/BogdanStelmah/Hometask_2_React_Redux/blob/master/licenses.json)
