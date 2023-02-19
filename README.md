@@ -18,4 +18,4 @@ You will also see any lint errors in the console.
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-[licenses.json](https://github.com/BogdanStelmah/Hometask_2_React_Redux/blob/storybook/licenses.json)
+[licenses.json](https://github.com/BogdanStelmah/Hometask_2_React_Redux/blob/master/licenses.json)
