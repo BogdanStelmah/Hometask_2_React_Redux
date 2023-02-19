@@ -37,7 +37,7 @@ const Home = () => {
 	const dataCategories = useAppSelector(state => state.categoryReducer.categories);
 
 	return (
-		<main className="bg-white mx-2">
+		<main className="bg-white mx-2 h">
 			<div className="max-w-5xl mx-auto">
 				<Table typeTable={TypeTable.Notes} dataSource={dataNotes}/>
 
