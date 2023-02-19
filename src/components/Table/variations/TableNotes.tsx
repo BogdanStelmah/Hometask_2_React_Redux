@@ -35,7 +35,7 @@ const TableNotes = ({ notes }: TableNotesProps) => {
 			<table className="w-full border-separate border-spacing-y-3 text-left table-fixed" id="table__notes">
 				<tbody>
 				<tr className="bg-zinc-400 text-gray-50">
-					<th className="rounded-bl-md rounded-tl-md w-20"></th>
+					<th className="rounded-bl-md rounded-tl-md w-16"></th>
 					<th>Name</th>
 					<th>Created</th>
 					<th>Category</th>
